@@ -1,7 +1,12 @@
-import Login from './Pages/Login/Login';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Navigation from './Navigation';
+
 function App() {
   return (
-    <Login/>
+    <BrowserRouter>
+      <Navigation/>
+    </BrowserRouter>
   );
 }
 
