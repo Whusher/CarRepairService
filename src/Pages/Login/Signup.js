@@ -21,18 +21,18 @@ export default function Signin() {
       <div className="w-1/2 bg-white h-full overflow-hidden lg:block hidden">
         {/* Contenido de la primera parte del formulario */}
         <h3 className="text-center text-2xl font-bold font-sans italic mt-24 p-3">
-          The car of your dreams deserves a great garage with low prices
+            Your dream car deserves a top-tier workshop with unbeatable rates.
         </h3>
         <div className="w-full h-full">
           <div className="relative h-full">
             <img
-              src={require("../../Images/Car.png")}
+              src={require("../../Images/Car2.png")}
               alt=""
               className="absolute inset-x-0 top-[-20%] w-350 h-1/2 mx-auto z-10"
             />
-            <div className="h-1/2 w-full transform skew-y-12 bg-orange-400 mt-80">
+            <div className="h-1/2 w-full transform skew-y-10  mt-60">
               {/**First structure by AA triangle */}
-              <div className="absolute inset-x-0 top-60 w-full h-full bg-orange-500 transform skew-y-6">
+              <div className="absolute inset-x-0 top-60 w-full h-full transform skew-y-6">
                 {/**Second Structure by AA */}
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function Signin() {
               className="mx-auto mb-2 w-3/4 sm:w-2/4 md:w-1/4 lg:w-1/2 mt-8"
             />
             <p className="inset-x-0 bottom-0 text-center text-xl text-white font-semibold italic mt-1">
-              Car Repair Service
+              "Car Repair Service"
             </p>
 
             <form onSubmit={handleSubmit} className="p-5 m-3 mt-4">
@@ -253,7 +253,7 @@ export default function Signin() {
                     <button
                       type="button"
                       onClick={handleBackClick}
-                      className="bg-orange-400 hover:bg-orange-600 text-black font-bold py-3 px-4 md:px-5 rounded-md ml-2"
+                      className="bg-orange-400 hover:bg-orange-600 text-black font-bold py-2 px-4 md:px-5 rounded-md ml-2"
                     >
                       BACK
                     </button>
@@ -262,7 +262,7 @@ export default function Signin() {
 
                     <button
                       type="submit"
-                      className="bg-orange-400 hover:bg-orange-600 text-black font-bold py-3 px-4 md:px-5 rounded-md ml-2"
+                      className="bg-orange-400 hover:bg-orange-600 text-black font-bold py-2 px-4 md:px-5 rounded-md ml-2"
                     >
                       SIGN UP
                     </button>
