@@ -33,7 +33,7 @@ export default function Login() {
       </div>
       {/* <!-- Right: Login Form --> */}
       <div className="lg:p-36 md:p-52 sm:20 p-3 w-full lg:w-1/2 bg-neutral-950">
-        <h1 className="text-4xl lg:text-6xl xl:text-8xl font-sans font-semibold mb-5 text-white text-center">CAR REPAIR SERVICE</h1>
+        <h1 className="text-4xl lg:text-6xl xl:text-6xl font-sans font-semibold mb-5 text-white text-center">CAR REPAIR <span className='block'>SERVICE</span></h1>
         <form action="#" method="POST" className='p-5 m-5'>
           {/* <!-- Username Input --> */}
           <div className="mb-4">
