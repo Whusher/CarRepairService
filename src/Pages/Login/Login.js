@@ -47,7 +47,7 @@ export default function Login() {
               className="mx-auto mb-2 w-3/4 sm:w-2/4 md:w-1/4 lg:w-1/2 mt-8"
             />
             <p className="inset-x-0 bottom-0 text-center text-xl text-white font-semibold italic mt-1">
-              Car Repair Service
+              "Car Repair Service"
             </p>
 
             {/* Formulario */}
