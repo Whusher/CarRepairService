@@ -1,10 +1,55 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AlertIcon from "../../components/AlertIcon";
 
 export default function Signin() {
   const [showSecondPart, setShowSecondPart] = useState(false);
+  const [workshopName, setWorkshopName] = useState("");
+  const [address, setAddress] = useState("");
+  const [businessEmail, setBusinessEmail] = useState("");
+  const [businessPhone, setBusinessPhone] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [personalPhone, setPersonalPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [workshopNameError, setWorkshopNameError] = useState(false);
+  const [addressError, setAddressError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [businessPhoneError, setBusinessPhoneError] = useState(false);
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [personalPhoneError, setPersonalPhoneError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      !workshopName ||
+      !address ||
+      !businessEmail ||
+      !businessPhone ||
+      !firstName ||
+      !lastName ||
+      !personalPhone ||
+      !password ||
+      !confirmPassword
+    ) {
+      // Si alguno de los campos está vacío, mostrar la alerta correspondiente
+      setWorkshopNameError(!workshopName);
+      setAddressError(!address);
+      setEmailError(!businessEmail);
+      setBusinessPhoneError(!businessPhone);
+      setFirstNameError(!firstName);
+      setLastNameError(!lastName);
+      setPersonalPhoneError(!personalPhone);
+      setPasswordError(!password);
+      setConfirmPasswordError(!confirmPassword);
+      return;
+    }
+
+    return alert("Todo chido");
   };
 
   const handleNextClick = () => {
@@ -21,7 +66,7 @@ export default function Signin() {
       <div className="w-1/2 bg-white h-full overflow-hidden lg:block hidden">
         {/* Contenido de la primera parte del formulario */}
         <h3 className="text-center text-2xl font-bold font-sans italic mt-24 p-3">
-            Your dream car deserves a top-tier workshop with unbeatable rates.
+          Your dream car deserves a top-tier workshop with unbeatable rates.
         </h3>
         <div className="w-full h-full">
           <div className="relative h-full">
@@ -30,9 +75,9 @@ export default function Signin() {
               alt=""
               className="absolute inset-x-0 top-[-20%] w-350 h-1/2 mx-auto z-10"
             />
-            <div className="h-1/2 w-full transform skew-y-10  mt-60">
+            <div className="h-1/2 w-full transform skew-y-10 bg-blue-500 mt-52">
               {/**First structure by AA triangle */}
-              <div className="absolute inset-x-0 top-60 w-full h-full transform skew-y-6">
+              <div className="absolute inset-x-0 top-60 w-full h-full bg-blue-700 transform skew-y-6">
                 {/**Second Structure by AA */}
               </div>
             </div>
@@ -54,77 +99,144 @@ export default function Signin() {
             </p>
 
             <form onSubmit={handleSubmit} className="p-5 m-3 mt-4">
-              {/* Se muestra la primera parte del formulario al cargar la página*/}
+              {/* Se muestra la primera parte del formulario (informacion del taller) al cargar la página*/}
 
               {!showSecondPart && (
                 <>
+                  <p className="inset-x-0 bottom-0 text-right text-xl text-white font-semibold italic mt-1">
+                    Business info
+                  </p>
                   <div className="mb-4">
                     <div className="mb-4">
                       <label
-                        htmlFor="username"
+                        htmlFor="workshopName"
                         className="block text-white mb-4"
                       >
                         Workshop name
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setWorkshopName(e.target.value);
+                          setWorkshopNameError(false);
+                        }}
                         type="text"
-                        id="username"
-                        name="username"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="workshopName"
+                        name="workshopName"
+                        value={workshopName}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          workshopNameError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {workshopNameError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
 
                     <div className="mb-4">
                       <label
-                        htmlFor="username"
+                        htmlFor="address"
                         className="block text-white mb-4"
                       >
                         Address
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setAddress(e.target.value);
+                          setAddressError(false);
+                        }}
                         type="text"
-                        id="username"
-                        name="username"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="address"
+                        name="address"
+                        value={address}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          addressError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {addressError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
 
                     <div className="mb-4">
                       <label
-                        htmlFor="username"
+                        htmlFor="businessEmail"
                         className="block text-white mb-4"
                       >
                         Email
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setBusinessEmail(e.target.value);
+                          setEmailError(false);
+                        }}
                         type="text"
-                        id="username"
-                        name="username"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="businessEmail"
+                        name="businessEmail"
+                        value={businessEmail}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          emailError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {emailError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
 
                     <div className="mb-4">
                       <label
-                        htmlFor="username"
+                        htmlFor="businessPhone"
                         className="block text-white mb-4"
                       >
                         Business phone
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setBusinessPhone(e.target.value);
+                          setBusinessPhoneError(false);
+                        }}
                         type="text"
-                        id="username"
-                        name="username"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="businessPhone"
+                        name="businessPhone"
+                        value={businessPhone}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          businessPhoneError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {businessPhoneError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -141,64 +253,115 @@ export default function Signin() {
                 </>
               )}
 
-              {/* Cuando se preciona NEXT se muestra la segunda parte del formulario */}
+              {/* Cuando se preciona NEXT se muestra la segunda parte del formulario (informacion del dueño del taller)*/}
               {showSecondPart && (
                 <>
+                  <p className="inset-x-0 bottom-0 text-right text-xl text-white font-semibold italic mt-1">
+                    Owner info
+                  </p>
                   <div className="mb-4">
                     <div className="mb-4">
                       <label
-                        htmlFor="username"
+                        htmlFor="firstName"
                         className="block text-white mb-4"
                       >
                         First name
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setFirstName(e.target.value);
+                          setFirstNameError(false);
+                        }}
                         type="text"
-                        id="username"
-                        name="username"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="firstName"
+                        name="firstName"
+                        value={firstName}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          firstNameError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {firstNameError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
 
                     <div className="mb-4">
                       <label
-                        htmlFor="username"
+                        htmlFor="lastName"
                         className="block text-white mb-4"
                       >
                         Last name
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setLastName(e.target.value);
+                          setLastNameError(false);
+                        }}
                         type="text"
-                        id="username"
-                        name="username"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="lastName"
+                        name="lastName"
+                        value={lastName}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          lastNameError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {lastNameError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
 
                     <div className="mb-4">
                       <label
-                        htmlFor="username"
+                        htmlFor="personalPhone"
                         className="block text-white mb-4"
                       >
                         Phone
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setPersonalPhone(e.target.value);
+                          setPersonalPhoneError(false);
+                        }}
                         type="text"
-                        id="username"
-                        name="username"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="personalPhone"
+                        name="personalPhone"
+                        value={personalPhone}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          personalPhoneError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {personalPhoneError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
 
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                       <label
-                        htmlFor="username"
+                        htmlFor="personalEmail"
                         className="block text-white mb-4"
                       >
                         Email
@@ -206,12 +369,24 @@ export default function Signin() {
                       <input
                         onChange={() => {}}
                         type="text"
-                        id="username"
-                        name="username"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="personalEmail"
+                        name="personalEmail"
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          personalEmailError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
-                    </div>
+
+                      {personalEmailError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
+                    </div> */}
 
                     <div className="mb-4">
                       <label
@@ -221,30 +396,62 @@ export default function Signin() {
                         Password
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          setPasswordError(false);
+                        }}
                         type="password"
                         id="password"
                         name="password"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        value={password}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          passwordError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {passwordError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
 
                     <div className="mb-4">
                       <label
-                        htmlFor="password"
+                        htmlFor="confirmPassword"
                         className="block text-white mb-4"
                       >
                         Password confirmation
                       </label>
                       <input
-                        onChange={() => {}}
+                        onChange={(e) => {
+                          setConfirmPassword(e.target.value);
+                          setConfirmPasswordError(false);
+                        }}
                         type="password"
-                        id="password"
-                        name="password"
-                        className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={confirmPassword}
+                        className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                          confirmPasswordError ? "border-red-500" : ""
+                        }`}
                         autoComplete="off"
                       />
+
+                      {confirmPasswordError && (
+                        <p
+                          className="text-red-500 text-sm mt-1"
+                          style={{ display: "inline-flex" }}
+                        >
+                          <AlertIcon />
+                          This field is required
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -261,7 +468,7 @@ export default function Signin() {
                     {/* Enviar el formulario */}
 
                     <button
-                      type="submit"
+                      onClick={handleSubmit}
                       className="bg-orange-400 hover:bg-orange-600 text-black font-bold py-2 px-4 md:px-5 rounded-md ml-2"
                     >
                       SIGN UP

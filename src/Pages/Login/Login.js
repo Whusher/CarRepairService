@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import AlertIcon from "../../components/AlertIcon";
+
 
 export default function Login() {
   const navigation = useNavigate();
@@ -11,6 +13,32 @@ export default function Login() {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Realizar validaciones aquí
+    if ((!email || email === "") && (!password || password === "")) {
+      setEmailError(true);
+      setPasswordError(true);
+      return;
+    }else if (!email || email === "") {
+      setPasswordError(true);
+      return;
+    }else if (!password || password === "") {
+      setPasswordError(true);
+      return;
+    }
+
+    setEmailError(false);
+    setPasswordError(false);
+
+    return alert("Todo chido");
+  };
 
   return (
     <div className="flex justify-center items-center h-screen bg-neutral-950">
@@ -39,31 +67,7 @@ export default function Login() {
 
       {/* Right: Login Form */}
       <div className="w-full lg:w-1/2 bg-neutral-950 overflow-auto max-h-screen">
-        {/**Landing Page */}
-        <div className="flex justify-end text-right mr-4">
-          <Link className="font-semibold font-sans text-orange-400 shadow-lg hover:shadow-orange-500/50 rounded-lg p-2">
-            About Us
-            <svg
-              className="icon icon-tabler icon-tabler-battery-automotive inline mb-2 "
-              width="44"
-              height="20"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="#E6961D"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M3 6m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-              <path d="M6 6v-2" />
-              <path d="M19 4l0 2" />
-              <path d="M6.5 13l3 0" />
-              <path d="M14.5 13l3 0" />
-              <path d="M16 11.5l0 3" />
-            </svg>
-          </Link>
-        </div>
+        {/* Contenido del lado derecho */}
         <div className="flex justify-center items-center h-full">
           <div className="p-5 w-full max-w-md">
             <img
@@ -72,39 +76,68 @@ export default function Login() {
               className="mx-auto mb-2 w-3/4 sm:w-2/4 md:w-1/4 lg:w-1/2 mt-8"
             />
             <p className="inset-x-0 bottom-0 text-center text-xl text-white font-semibold italic mt-1">
-              "Car Repair Service"
+              Car Repair Service
             </p>
 
             {/* Formulario */}
             <form action="#" method="POST" className="p-5 m-3 mt-4">
-              {/* Username Input */}
+              
               <div className="mb-4">
-                <label htmlFor="username" className="block text-white mb-4">
+                <label htmlFor="email" className="block text-white mb-4">
                   Email
                 </label>
                 <input
-                  onChange={() => {}}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError(false);
+                  }}
                   type="text"
-                  id="username"
-                  name="username"
-                  className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                  id="email"
+                  name="email"
+                  value={email}
+                  className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                    emailError ? "border-red-500" : ""
+                  }`}
                   autoComplete="off"
                 />
+                {emailError && (
+                  <p
+                    className="text-red-500 text-sm mt-1"
+                    style={{ display: "inline-flex" }}
+                  >
+                    <AlertIcon/>
+                    This field is required
+                  </p>
+                )}
               </div>
 
-              {/* Password Inputs */}
               <div className="mb-4">
                 <label htmlFor="password" className="block text-white mb-4">
                   Password
                 </label>
                 <input
-                  onChange={() => {}}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError(false);
+                  }}
                   type="password"
                   id="password"
                   name="password"
-                  className="w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500"
+                  value={password}
+                  className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                    passwordError ? "border-red-500" : ""
+                  }`}
                   autoComplete="off"
                 />
+                {passwordError && (
+                  <p
+                    className="text-red-500 text-sm mt-1"
+                    style={{ display: "inline-flex" }}
+                  >
+                    <AlertIcon/>
+                    This field is required
+                  </p>
+                )}
               </div>
 
               {/* Forgot Password Link */}
@@ -120,7 +153,7 @@ export default function Login() {
               {/* Login Button */}
               <div className="text-center">
                 <button
-                  onClick={() => {}}
+                  onClick={handleSubmit}
                   className="bg-orange-400 hover:bg-blue-600 text-black font-bold p-8 rounded-md py-2 px-5 w-1/2"
                 >
                   SIGN IN
