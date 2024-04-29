@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import AlertIcon from "../../components/AlertIcon";
+import AlertIcon from "../../Components/AlertIcon";
 
 
 export default function Login() {
@@ -33,7 +33,7 @@ export default function Login() {
       setPasswordError(true);
       return;
     }
-
+    
     setEmailError(false);
     setPasswordError(false);
 
@@ -67,6 +67,30 @@ export default function Login() {
 
       {/* Right: Login Form */}
       <div className="w-full lg:w-1/2 bg-neutral-950 overflow-auto max-h-screen">
+      <div className="flex justify-end text-right mr-4">
+          <Link className="font-semibold font-sans text-orange-400 shadow-lg hover:shadow-orange-500/50 rounded-lg p-2">
+            About Us
+            <svg
+              className="icon icon-tabler icon-tabler-battery-automotive inline mb-2 "
+              width="44"
+              height="20"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="#E6961D"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 6m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+              <path d="M6 6v-2" />
+              <path d="M19 4l0 2" />
+              <path d="M6.5 13l3 0" />
+              <path d="M14.5 13l3 0" />
+              <path d="M16 11.5l0 3" />
+            </svg>
+          </Link>
+        </div>
         {/* Contenido del lado derecho */}
         <div className="flex justify-center items-center h-full">
           <div className="p-5 w-full max-w-md">

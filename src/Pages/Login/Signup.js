@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import AlertIcon from "../../components/AlertIcon";
+import AlertIcon from "../../Components/AlertIcon";
 
 export default function Signin() {
   const [showSecondPart, setShowSecondPart] = useState(false);
   const [workshopName, setWorkshopName] = useState("");
-  const [address, setAddress] = useState("");
+  const [location, setAddress] = useState("");
   const [businessEmail, setBusinessEmail] = useState("");
   const [businessPhone, setBusinessPhone] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -27,7 +27,7 @@ export default function Signin() {
     e.preventDefault();
     if (
       !workshopName ||
-      !address ||
+      !location ||
       !businessEmail ||
       !businessPhone ||
       !firstName ||
@@ -38,7 +38,7 @@ export default function Signin() {
     ) {
       // Si alguno de los campos está vacío, mostrar la alerta correspondiente
       setWorkshopNameError(!workshopName);
-      setAddressError(!address);
+      setAddressError(!location);
       setEmailError(!businessEmail);
       setBusinessPhoneError(!businessPhone);
       setFirstNameError(!firstName);
@@ -142,10 +142,10 @@ export default function Signin() {
 
                     <div className="mb-4">
                       <label
-                        htmlFor="address"
+                        htmlFor="location"
                         className="block text-white mb-4"
                       >
-                        Address
+                        Location
                       </label>
                       <input
                         onChange={(e) => {
@@ -153,9 +153,9 @@ export default function Signin() {
                           setAddressError(false);
                         }}
                         type="text"
-                        id="address"
-                        name="address"
-                        value={address}
+                        id="location"
+                        name="location"
+                        value={location}
                         className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
                           addressError ? "border-red-500" : ""
                         }`}
