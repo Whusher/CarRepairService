@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import {toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../../Components/AuthContext";
 import AlertIcon from "../../Components/AlertIcon";
-
+import validateEmail from "../../Utils/ValidationMail";
 
 export default function Login() {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // Obtiene la función de login del contexto de autenticación
   useEffect(() => {
-    // Aplicar la propiedad 'overflow: hidden;' al body al montar el componente
     document.body.style.overflow = "hidden";
-    // Restaurar la propiedad 'overflow' al body al desmontar el componente
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -22,14 +23,15 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Realizar validaciones aquí
-    if ((!email || email === "") && (!password || password === "")) {
+    if (!validateEmail(email)) {
+       return toast.error('Your email is not accepted',{theme:'dark'});
+    } else if((!email || email === "") && (!password || password === "")){
       setEmailError(true);
       setPasswordError(true);
-      return;
     }else if (!email || email === "") {
-      setPasswordError(true);
+      setEmailError(true);
       return;
-    }else if (!password || password === "") {
+    } else if (!password || password === "") {
       setPasswordError(true);
       return;
     }
@@ -37,7 +39,10 @@ export default function Login() {
     setEmailError(false);
     setPasswordError(false);
 
-    return alert("Todo chido");
+    // Llamar a la función de login del contexto de autenticación
+    login(email);
+    // Redirigir al usuario a la página Home después de iniciar sesión
+    navigate("/home");
   };
 
   return (
@@ -76,11 +81,11 @@ export default function Login() {
               width="44"
               height="20"
               viewBox="0 0 24 24"
-              stroke-width="2"
+              strokeWidth="2"
               stroke="#E6961D"
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M3 6m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
@@ -101,7 +106,7 @@ export default function Login() {
               className="mx-auto mb-2 w-3/4 sm:w-2/4 md:w-1/4 lg:w-1/2 mt-8"
             />
             <p className="inset-x-0 bottom-0 text-center text-xl text-white font-semibold italic mt-1">
-              Car Repair Service
+              "Car Repair Service"
             </p>
 
             {/* Formulario */}
