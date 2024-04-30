@@ -68,7 +68,8 @@ export default function Login() {
       {/* Right: Login Form */}
       <div className="w-full lg:w-1/2 bg-neutral-950 overflow-auto max-h-screen">
       <div className="flex justify-end text-right mr-4">
-          <Link className="font-semibold font-sans text-orange-400 shadow-lg hover:shadow-orange-500/50 rounded-lg p-2">
+          <Link className="font-semibold font-sans text-orange-400 shadow-lg hover:shadow-orange-500/50 rounded-lg p-2"
+            to={'/about'}>
             About Us
             <svg
               className="icon icon-tabler icon-tabler-battery-automotive inline mb-2 "
