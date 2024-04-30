@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Navigation from './Navigation';
+import { AuthProvider } from './Components/AuthContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navigation/>
+      <AuthProvider>
+        <Navigation/>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
