@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Navigation from './Navigation';
 import { AuthProvider } from './Components/AuthContext';
 
-function App() {
+function App() { 
+  
   return (
     <BrowserRouter>
       <AuthProvider>

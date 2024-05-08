@@ -5,7 +5,7 @@ import AlertIcon from "../../Components/AlertIcon";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Obtiene la función de login del contexto de autenticación
+  const { login } = useContext(AuthContext);
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -20,7 +20,6 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Realizar validaciones aquí
     if ((!email || email === "") && (!password || password === "")) {
       setEmailError(true);
       setPasswordError(true);
@@ -36,9 +35,7 @@ export default function Login() {
     setEmailError(false);
     setPasswordError(false);
 
-    // Llamar a la función de login del contexto de autenticación
     login(email);
-    // Redirigir al usuario a la página Home después de iniciar sesión
     navigate("/home");
   };
 
