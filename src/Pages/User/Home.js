@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../Components/AuthContext";
 import SideBar from "../../Components/SideBar";
 import Footer from "../../Components/Footer";
@@ -9,7 +10,9 @@ const Home = () => {
   const handleLogout = () => {
     logout();
   };
-
+  useEffect(()=>{
+    toast.success('Welcome to CRS');
+  })
   return (
     <div className="flex flex-col h-screen">
       <div className="flex flex-row flex-1 m-8">

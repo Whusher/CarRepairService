@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Navigation from './Navigation';
 import { AuthProvider } from './Components/AuthContext';
+import { ToastContainer } from 'react-toastify';
 
 function App() { 
   
@@ -9,6 +10,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Navigation/>
+        <ToastContainer />
       </AuthProvider>
     </BrowserRouter>
   );

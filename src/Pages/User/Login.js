@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import {toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../Components/AuthContext";
 import AlertIcon from "../../Components/AlertIcon";
+import validateEmail from "../../Utils/ValidationMail";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,11 +22,13 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ((!email || email === "") && (!password || password === "")) {
+    // Realizar validaciones aquí
+    if (!validateEmail(email)) {
+       return toast.error('Your email is not accepted',{theme:'dark'});
+    } else if((!email || email === "") && (!password || password === "")){
       setEmailError(true);
       setPasswordError(true);
-      return;
-    } else if (!email || email === "") {
+    }else if (!email || email === "") {
       setEmailError(true);
       return;
     } else if (!password || password === "") {
@@ -67,18 +71,19 @@ export default function Login() {
       {/* Right: Login Form */}
       <div className="w-full lg:w-1/2 bg-neutral-950 overflow-auto max-h-screen">
       <div className="flex justify-end text-right mr-4">
-          <Link className="font-semibold font-sans text-orange-400 shadow-lg hover:shadow-orange-500/50 rounded-lg p-2">
+          <Link className="font-semibold font-sans text-orange-400 shadow-lg hover:shadow-orange-500/50 rounded-lg p-2"
+            to={'/about'}>
             About Us
             <svg
               className="icon icon-tabler icon-tabler-battery-automotive inline mb-2 "
               width="44"
               height="20"
               viewBox="0 0 24 24"
-              stroke-width="2"
+              strokeWidth="2"
               stroke="#E6961D"
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M3 6m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
