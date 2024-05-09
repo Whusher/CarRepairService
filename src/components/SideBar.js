@@ -14,16 +14,16 @@ export default function SideBar() {
   };
 
   return (
-    <div className="bg-[#0D0D0D] text-white p-4 w-64 rounded-3xl">
-      <div className="flex justify-center pt-3 text-xl px-5">
+    <div className="bg-[#0D0D0D] text-white p-4 w-[100%] rounded-3xl">
+      <div className="flex justify-center pt-[5%] text-xl px-5">
         <p>
           Hello, <span className="text-orange-500">{user.name}!</span>
         </p>
       </div>
-      <div className="flex justify-center pt-8 px-5">
+      <div className="flex justify-center pt-8">
         <p>----ACTIONS----</p>
       </div>
-      <div className="my-6">
+      <div className="mt-[12%]">
         <Link aria-current="page" className="active" to={"/home"}>
           <button
             className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 

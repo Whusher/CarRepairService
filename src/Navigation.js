@@ -18,7 +18,7 @@ const Navigation = () => {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/about" element={<AboutUs />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={user ? <Navigate to="/home" /> : <Login />} />
       <Route path="/signup" element={<Signup />} />
       {user && tipoUs === "1" ? (
         <Route path="/home" element={<Home />} />

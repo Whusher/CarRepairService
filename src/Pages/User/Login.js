@@ -28,10 +28,7 @@ export default function Login() {
     } else if((!email || email === "") && (!password || password === "")){
       setEmailError(true);
       setPasswordError(true);
-    }else if (!email || email === "") {
-      setEmailError(true);
-      return;
-    } else if (!password || password === "") {
+    }else if (!password || password === "") {
       setPasswordError(true);
       return;
     }
@@ -40,6 +37,7 @@ export default function Login() {
     setPasswordError(false);
 
     login(email);
+    toast.success('Welcome to CRS');
     navigate("/home");
   };
 
