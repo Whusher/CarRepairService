@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const PublicationCard = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -15,7 +16,7 @@ const PublicationCard = () => {
     };
   }, []);
 
-  const height = windowWidth > 768 ? "420px" : "10%";
+  const height = windowWidth >= 768 ? "420px" : "10%";
 
   return (
     <div className="flex flex-col md:flex-row bg-gray-100 rounded-3xl shadow-xl mt-[2%] overflow-hidden mb-10">
@@ -25,7 +26,7 @@ const PublicationCard = () => {
           src={require("../Images/accidente1.png")}
           alt="Publication"
           className="w-full"
-          style={{ height: `${height}`}}
+          style={{ height: `${height}` }}
         />
       </div>
 
@@ -55,9 +56,12 @@ const PublicationCard = () => {
             </div>
           </div>
           <div className="flex justify-center">
-            <button className="bg-[#E6961D] hover:bg-orange-500 font-bold py-[2%] px-[4%] rounded-3xl w-1/3 shadow-button mb-[8%]">
+            <Link
+              to="/details"
+              className="bg-[#E6961D] hover:bg-orange-500 font-bold py-[2%] px-[4%] rounded-3xl w-1/3 shadow-button mb-[8%] text-center"
+            >
               More
-            </button>
+            </Link>
           </div>
         </div>
       </div>

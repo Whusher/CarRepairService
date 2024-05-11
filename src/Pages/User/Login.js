@@ -121,7 +121,7 @@ export default function Login() {
                   id="email"
                   name="email"
                   value={email}
-                  className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                  className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-black ${
                     emailError ? "border-red-500" : ""
                   }`}
                   autoComplete="off"
@@ -150,7 +150,7 @@ export default function Login() {
                   id="password"
                   name="password"
                   value={password}
-                  className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-blue-500 ${
+                  className={`w-full border border-gray-300 rounded-2xl py-2 px-3 focus:outline-none focus:border-black ${
                     passwordError ? "border-red-500" : ""
                   }`}
                   autoComplete="off"
