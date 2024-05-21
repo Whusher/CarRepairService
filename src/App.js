@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Navigation from './Navigation';
 import { AuthProvider } from './Components/AuthContext';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() { 
-  
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Navigation/>
+        <Navigation />
         <ToastContainer />
       </AuthProvider>
     </BrowserRouter>

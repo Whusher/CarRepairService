@@ -3,10 +3,12 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../Components/AuthContext";
 import SideBar from "../../Components/SideBar";
 import Footer from "../../Components/Footer";
+import PublicationCard from "../../Components/PublicationCard";
 
 const History = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,45 +22,29 @@ const History = () => {
     };
   }, []);
 
-  const pyValue = windowWidth > 768 ? "2%" : "8%";
-  const mtValue = windowWidth < 768 && "12%";
+  const handleSidebarToggle = (toggle) => {
+    setToggle(toggle);
+  };
 
   return (
-    <div className="flex flex-col h-screen relative">
-      {/* SideNav */}
-      {windowWidth < 768 ? (
-        isSidebarOpen && (
-          <div className="fixed z-20 h-screen overflow-auto m-[2%]">
-            <SideBar />
-            <button
-              onClick={() => setIsSidebarOpen(false)}
-              className="bg-red-500 text-white px-2 py-1 rounded-xl"
-            >
-              Close
-            </button>
-          </div>
-        )
-      ) : (
-        <div className="fixed z-10 h-screen overflow-auto m-[2%]">
-          <SideBar />
-        </div>
-      )}
-
-      {/* Contenido */}
-      <div className="flex-1 md:ml-[18%] overflow-auto">
+    <div className="w-full h-screen flex">
+      <SideBar onToggle={handleSidebarToggle} />
+      <div className="flex-1 overflow-auto">
         <div className="pt-[2%] sticky top-0 bg-white">
           <div className="flex justify-center text-white">
             <h1 className="text-2xl mb-6 bg-[#0D0D0D] py-4 px-[18%] rounded-2xl text-3xl font-sans font-semibold">
-              History
+              HISTORY
             </h1>
           </div>
         </div>
-        <div className="mx-[12%]">
+        <div className={`${toggle ? "mx-[2%] mb-[5%]" : "mx-[12%]"} px-[2%] flex flex-wrap`}>
+          Hola
         </div>
       </div>
 
-      {/* Footer */}
-      <Footer className="w-full fixed bottom-0 z-10" />
+      <div className="w-full absolute bottom-0 z-30 ">
+        <Footer />
+      </div>
     </div>
   );
 };

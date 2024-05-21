@@ -7,7 +7,8 @@ import AboutUs from "./Pages/InfoSchema/AboutUs";
 import { AuthContext } from "./Components/AuthContext";
 import History from "./Pages/User/History";
 import WorkDetails from "./Pages/User/WorkDetails";
-import { PrivateRoute } from "./Components/AuthContext"; // Importa el componente PrivateRoute
+import Profile from "./Pages/User/Profile";
+import { PrivateRoute } from "./Components/AuthContext";
 
 const Navigation = () => {
   const { user } = useContext(AuthContext);
@@ -24,8 +25,8 @@ const Navigation = () => {
         <Route path="/home" element={<Home/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/details" element={<WorkDetails/>}/>
+        <Route path="/profile" element={<Profile/>}/>
       </Route>
-      
     </Routes>
   );
 };

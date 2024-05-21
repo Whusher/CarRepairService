@@ -2,42 +2,94 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
-export default function SideBar() {
+export default function SideBar({ onToggle }) {
   const { user, logout } = useContext(AuthContext);
-  const navigation = useNavigate();
-  useEffect(() => {
-    //Chequeo de usuario correspondiente por si descubren alguna ruta y quieren explotarla
-  }, [navigation]);
+  const [toggle, setToggle] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleToggle = () => {
+    setToggle(!toggle);
+    if (onToggle) {
+      onToggle(!toggle);
+    }
+    saveToggleState(!toggle);
+  };
+  
+  const saveToggleState = (toggleState) => {
+    localStorage.setItem("toggle", JSON.stringify(toggleState));
+  };
 
   const handleLogout = () => {
     logout();
   };
 
+  const loadToggleState = () => {
+    const storedToggleState = localStorage.getItem("toggle");
+    return storedToggleState ? JSON.parse(storedToggleState) : false;
+  };
+
+  useEffect(() => {
+    setToggle(loadToggleState());
+  }, []);
+
   return (
-    <div className="bg-[#0D0D0D] text-white p-4 w-[100%] rounded-3xl">
-      <div className="flex justify-center pt-[5%] text-xl px-5">
+    <div
+      className={`${
+        toggle ? "last: w-[7rem]" : "last: w-[18rem]"
+      } bg-[#0D0D0D] h-[85%] rounded-3xl ml-8 p-4 border transition-all duration-500 border-solid relative bottom-6 top-[4%]`}
+    >
+      <div
+        className="absolute top-[7rem] flex justify-center items-center -left-5 w-10 h-10 bg-black rounded-full cursor-pointer"
+        onClick={handleToggle}
+      >
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          fill="white"
+          class="bi bi-arrow-left-circle-fill"
+          viewBox="0 0 16 16"
+          className={`${
+            toggle ? "rotate-180" : ""
+          } transition-all duration-300`}
+        >
+          <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+        </svg>
+      </div>
+      <div className="flex justify-center pt-[5%] text-xl px-5 text-white">
         <p>
           Hello, <span className="text-orange-500">{user.name}!</span>
         </p>
       </div>
-      <div className="flex justify-center pt-8">
-        <p>----ACTIONS----</p>
+      <div className="flex justify-center pt-8 text-white">
+        {!toggle ? (
+          <div className="w-[90%] h-1 bg-[#E6961D]" />
+        ) : (
+          <div className="w-full h-1 bg-[#E6961D]" />
+        )}
       </div>
-      <div className="mt-[12%]">
+      <div className="mt-[12%] mx-[8%]">
         <Link aria-current="page" className="active" to={"/home"}>
           <button
-            className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
+            className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
             hover:bg-gradient-to-tr hover:from-orange-600 to-orange-400
-            hover:shadow-lg hover:shadow-orange-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            hover:shadow-lg hover:shadow-orange-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${toggle && "my-[15%]"}`}
             type="button"
           >
-            <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-              PUBLICATIONS
-            </p>
+            {!toggle ? (
+              <>
+                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                  PUBLICATIONS
+                </p>
+              </>
+            ) : (
+              ""
+            )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width={toggle ? "25" : "20"}
+              height={toggle ? "25" : "20"}
               fill="currentColor"
               class="bi bi-shop"
               viewBox="0 0 16 16"
@@ -48,18 +100,24 @@ export default function SideBar() {
         </Link>
         <Link className="" to="/history">
           <button
-            className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
+            className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
                   hover:bg-gradient-to-tr hover:from-orange-600 to-orange-400
-                  hover:shadow-lg hover:shadow-orange-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  hover:shadow-lg hover:shadow-orange-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${toggle && "my-[15%]"}`}
             type="button"
           >
-            <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-              HISTORY
-            </p>
+            {!toggle ? (
+              <>
+                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                  HISTORY
+                </p>
+              </>
+            ) : (
+              ""
+            )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width={toggle ? "25" : "20"}
+              height={toggle ? "25" : "20"}
               fill="currentColor"
               class="bi bi-clock-history"
               viewBox="0 0 16 16"
@@ -72,18 +130,24 @@ export default function SideBar() {
         </Link>
         <Link className="" to="/Personal">
           <button
-            className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
+            className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
                   hover:bg-gradient-to-tr hover:from-orange-600 to-orange-400
-                  hover:shadow-lg hover:shadow-orange-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  hover:shadow-lg hover:shadow-orange-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${toggle && "my-[15%]"}`}
             type="button"
           >
-            <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-              CURRENT ACEPTED
-            </p>
+            {!toggle ? (
+              <>
+                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                  CURRENT ACEPTED
+                </p>
+              </>
+            ) : (
+              ""
+            )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width={toggle ? "25" : "20"}
+              height={toggle ? "25" : "20"}
               fill="currentColor"
               class="bi bi-ui-checks"
               viewBox="0 0 16 16"
@@ -92,20 +156,26 @@ export default function SideBar() {
             </svg>
           </button>
         </Link>
-        <Link className="" to="/Personal">
+        <Link className="" to="/profile">
           <button
-            className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
+            className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
                   hover:bg-gradient-to-tr hover:from-orange-600 to-orange-400
-                  hover:shadow-lg hover:shadow-orange-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  hover:shadow-lg hover:shadow-orange-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${toggle && "my-[15%]"}`}
             type="button"
           >
-            <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-              MY ACCOUNT
-            </p>
+            {!toggle ? (
+              <>
+                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                  MY ACCOUNT
+                </p>
+              </>
+            ) : (
+              ""
+            )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width={toggle ? "25" : "20"}
+              height={toggle ? "25" : "20"}
               fill="currentColor"
               class="bi bi-person-circle"
               viewBox="0 0 16 16"
@@ -118,23 +188,29 @@ export default function SideBar() {
             </svg>
           </button>
         </Link>
-        <div className="mb-36">
-
-        </div>
         <button
-          className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
+          className={`bg-[#0D0D0D] absolute bottom-8 none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
                   hover:bg-gradient-to-tr hover:from-red-600 to-red-400
-                  hover:shadow-lg hover:shadow-red-500/40 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  hover:shadow-lg hover:shadow-red-500/40 active:bg-white/30 z-30 ${
+                    toggle ? "w-[60%]" : "w-[75%]"
+                  } flex items-center gap-4 px-4 capitalize`}
           type="button"
           onClick={handleLogout}
         >
-          <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-            LOGOUT
-          </p>
+          {!toggle ? (
+            <>
+              <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                LOGOUT
+              </p>
+            </>
+          ) : (
+            ""
+          )}
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
+            width={toggle ? "25" : "20"}
+            height={toggle ? "25" : "20"}
             fill="currentColor"
             class="bi bi-box-arrow-right"
             viewBox="0 0 16 16"

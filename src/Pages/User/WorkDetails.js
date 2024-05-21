@@ -2,6 +2,17 @@ import React, { useState } from "react";
 
 export default function WorkDetails() {
   const [expanded, setExpanded] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
+
+  const handleImageClick = (image) => {
+    setModalImage(image);
+    setExpanded(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalImage(null);
+    setExpanded(false);
+  };
 
   return (
     <div className="flex h-screen">
@@ -95,21 +106,40 @@ export default function WorkDetails() {
         </div>
         {/* Contenedor inferior */}
         <div className="h-[50%] bg-white flex flex-wrap justify-center">
-          {/* Imágenes que se expanden al hacer clic */}
+          {/* Imágenes */}
           {[1, 2, 3, 4].map((index) => (
             <img
               key={index}
               src={require(`../../Images/accidente1.png`)}
-              alt={`Publication 1`}
+              alt={`Publication ${index}`}
               className="w-[45%] cursor-pointer m-[2%] rounded-2xl"
               style={{
                 height: 230,
                 width: 340,
                 boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
               }}
+              onClick={() => handleImageClick("../../Images/accidente1.png")}
             />
           ))}
-          <div className="flex w-full h-10"></div>
+          {/* Modal */}
+          {expanded && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75">
+              <div className="relative">
+                <button
+                  className="absolute top-0 right-0 text-white text-2xl m-2"
+                  onClick={handleCloseModal}
+                >
+                  X
+                </button>
+                <img
+                  src={require(`../../Images/accidente1.png`)}
+                  alt="Expanded Image"
+                  className="max-w-full max-h-full"
+                />
+              </div>
+            </div>
+          )}
+          {/* Fin del modal */}
         </div>
       </div>
     </div>
