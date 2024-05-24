@@ -76,7 +76,7 @@ export default function WorkDetails() {
       </div>
       <div className="w-[60%] h-full bg-white flex flex-col overflow-auto">
         {/* Contenedor superior */}
-        <div className="h-[50%] bg-[#16181A] my-8 mx-[10.5%] rounded-3xl">
+        <div className="h-relative bg-[#16181A] my-8 mx-[10.5%] rounded-3xl pb-10">
           <h1 className=" text-white text-center py-5 px-8 text-2xl font-sans font-semibold">
             Operation's info
           </h1>
@@ -121,6 +121,7 @@ export default function WorkDetails() {
               onClick={() => handleImageClick("../../Images/accidente1.png")}
             />
           ))}
+          <div className="py-6 w-full"></div>
           {/* Modal */}
           {expanded && (
             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75">

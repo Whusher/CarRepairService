@@ -8,6 +8,7 @@ import { AuthContext } from "./Components/AuthContext";
 import History from "./Pages/User/History";
 import WorkDetails from "./Pages/User/WorkDetails";
 import Profile from "./Pages/User/Profile";
+import CurrentAcepted from "./Pages/User/CurrentAcepted";
 import { PrivateRoute } from "./Components/AuthContext";
 
 const Navigation = () => {
@@ -16,16 +17,17 @@ const Navigation = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={user ? <Navigate to="/home" /> : <Login />} />
       <Route path="*" element={<><h1>Tas perdido o k?</h1></>} />
       <Route path="/about" element={user ? <Navigate to="/home"/> : <AboutUs />} />
       <Route path="/login" element={user ? <Navigate to="/home" /> : <Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="/signup" element={user ? <Navigate to="/home" /> : <Signup />} />
       <Route element={<PrivateRoute user={user}/>}>
         <Route path="/home" element={<Home/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/details" element={<WorkDetails/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/acepted" element={<CurrentAcepted/>}/>
       </Route>
     </Routes>
   );

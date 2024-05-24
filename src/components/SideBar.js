@@ -128,7 +128,7 @@ export default function SideBar({ onToggle }) {
             </svg>
           </button>
         </Link>
-        <Link className="" to="/Personal">
+        <Link className="" to="/acepted">
           <button
             className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 rounded-lg text-white hover:bg-white/10 
                   hover:bg-gradient-to-tr hover:from-orange-600 to-orange-400

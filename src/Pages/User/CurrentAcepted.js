@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../Components/AuthContext";
 import SideBar from "../../Components/SideBar";
 import Footer from "../../Components/Footer";
-import CompletedCard from "../../Components/CompletedCard";
+import AceptedCard from "../../Components/Acepted";
 
-const History = () => {
+const CurrentAcepted = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [toggle, setToggle] = useState(false);
@@ -25,6 +25,7 @@ const History = () => {
   const handleSidebarToggle = (toggle) => {
     setToggle(toggle);
   };
+  
 
   const loadToggleState = () => {
     const storedToggleState = localStorage.getItem("toggle");
@@ -42,16 +43,16 @@ const History = () => {
         <div className="pt-[2%] sticky top-0 bg-white">
           <div className="flex justify-center text-white">
             <h1 className="text-2xl mb-6 bg-[#0D0D0D] py-4 px-[18%] rounded-2xl text-3xl font-sans font-semibold">
-              HISTORY
+              ACEPTED
             </h1>
           </div>
         </div>
-        <div className={`transition-all duration-1000 ${toggle ? "flex flex-wrap mx-[2%] mb-[4%]" : "grid grid-cols-1 mx-[14%] mb-[2%]"} px-[2%]`}>
-          <CompletedCard toggle={toggle} />
-          <CompletedCard toggle={toggle} />
-          <CompletedCard toggle={toggle} />
-          <CompletedCard toggle={toggle} />
-          <CompletedCard toggle={toggle} />
+        <div className={`transition-all duration-1000 ${toggle ? "flex flex-wrap mx-[2%] mb-[4%]" : "grid grid-cols-1 mx-[12%] mb-[2%]"} px-[2%]`}>
+          <AceptedCard toggle={toggle} />
+          <AceptedCard toggle={toggle} />
+          <AceptedCard toggle={toggle} />
+          <AceptedCard toggle={toggle} />
+          <AceptedCard toggle={toggle} />
           <div className="py-8"></div>
         </div>
       </div>
@@ -63,4 +64,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default CurrentAcepted;
